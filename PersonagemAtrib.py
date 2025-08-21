@@ -23,16 +23,16 @@ class EstiloClassico:
         print("\nRolando 3 dados de 6 lados para cada atributo na ordem clássica...")
         ordem = ["Força", "Destreza", "Constituição", "Inteligência", "Sabedoria", "Carisma"]
         for atributo in ordem:
-            rolagem = sum(random.randint(1, 6) for _ in range(3))
+            rolagem = sum(random.randint(1, 6) for _ in range(3)) #Rolando 3 dados de 6 lados
             personagem.atributos[atributo] = rolagem
 
 class EstiloAventureiro:
     def distribuir_atributos(self, personagem):
         print("\nRolando 3 dados de 6 lados seis vezes e distribuindo como desejar...")
-        resultados = [sum(random.randint(1, 6) for _ in range(3)) for _ in range(6)]
-        print(f"Resultados das rolagens: {resultados}")
-        atributos = list(personagem.atributos.keys())
-        for atributo in atributos:
+        resultados = [sum(random.randint(1, 6) for _ in range(3)) for _ in range(6)] #Rolando 3 dados de 6 lados seis vezes
+        print(f"Resultados das rolagens: {resultados}") #Exibindo os resultados das rolagens
+        atributos = list(personagem.atributos.keys()) # Obtendo os atributos do personagem
+        for atributo in atributos: #
             while True:
                 try:
                     valor = int(input(f"Escolha um valor para {atributo} entre {resultados}: "))
@@ -50,13 +50,13 @@ class EstiloHeroico:
         print("\nRolando 4 dados de 6 lados (descartando o menor) seis vezes e distribuindo como desejar...")
         resultados = []
         for _ in range(6):
-            dados = [random.randint(1, 6) for _ in range(4)]
-            dados.remove(min(dados))
-            resultados.append(sum(dados))
-        print(f"Resultados das rolagens: {resultados}")
+            dados = [random.randint(1, 6) for _ in range(4)] #Rolando 4 dados de 6 lados
+            dados.remove(min(dados)) #Removendo o menor dado
+            resultados.append(sum(dados)) #Somando os valores dos dados restantes
+        print(f"Resultados das rolagens: {resultados}") 
         atributos = list(personagem.atributos.keys())
         for atributo in atributos:
-            while True:
+            while True: 
                 try:
                     valor = int(input(f"Escolha um valor para {atributo} entre {resultados}: "))
                     if valor in resultados:
@@ -70,7 +70,9 @@ class EstiloHeroico:
 
 def main():
     print(f"\nBem-Vindo à OldDragon. Vamos começar com a sua escolha de estilo de jogo, Caro Aventureiro!\nEscolha abaixo qual estilo gostaria de usar:")
-    print(f"1 - Estilo Clássico (Este estilo também é conhecido por fazer a escolha aleatória das classes, já que você praticamente escolhe com qual classe vai jogar após determinar os atributos do seu personagem)\n2 - Estilo Aventureiro (Esse estilo de rolagem é idêntico ao estilo clássico, mas um pouco mais maleável porque você distribui dentre os atributos desejados.)\n3 - Estilo Heróico (O estilo heroico gerará personagens levemente superiores aos do estilo aventureiro. Você rolará 4 dados de 6 lados e descartará o menor resultado, distribuindo os valores como desejar.)\n")
+    print("1 - Estilo Clássico (Este estilo também é conhecido por fazer a escolha aleatória das classes, já que você praticamente escolhe com qual classe vai jogar após determinar os atributos do seu personagem)\n"
+          "2 - Estilo Aventureiro (Esse estilo de rolagem é idêntico ao estilo clássico, mas um pouco mais maleável porque você distribui dentre os atributos desejados.)\n"
+          "3 - Estilo Heróico (O estilo heroico gerará personagens levemente superiores aos do estilo aventureiro. Você rolará 4 dados de 6 lados e descartará o menor resultado, distribuindo os valores como desejar.)\n")
 
     opcao = int(input("Digite o número para escolha do estilo desejado: "))
     nome = input("Digite o nome do personagem: ")
