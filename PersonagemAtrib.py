@@ -46,7 +46,7 @@ def interpretar_atributo(nome, valor):
 
 class Personagem:
     def __init__ (self, nome): #Método construtor da classe Personagem
-        
+
         self.nome = nome
         self.atributos = {
             "Força": 0,
@@ -56,12 +56,28 @@ class Personagem:
             "Sabedoria": 0,
             "Carisma": 0,
         }
+        self.raca = None
+        self.classe = None
 
     def exibir_atributos(self):
         print("\n==--=== Atributos do Personagem ==--==")
         print(f"\nOlá {self.nome}, segue abaixo seu descritivo:")
         for chave, valor in self.atributos.items(): #Percorre o dicionário de atributos do personagem
             print(f"{chave}: {valor} - {interpretar_atributo(chave, valor)}") # Exibe o nome do atributo, seu valor e a interpretação correspondente
+
+        if self.raca:
+           print(f"\nRaça: {type(self.raca).__name__}")
+           print(f"Movimento: {self.raca.movimento}")
+           print(f"Infravisão: {self.raca.infravisao}")
+           print(f"Alinhamento: {self.raca.alinhamento}")
+           print(f"Habilidades raciais: {', '.join(self.raca.habilidades)}")
+
+        if self.classe:
+            print(f"\nClasse: {type(self.classe).__name__}")
+            print(f"Vida inicial: {self.classe.vida}")
+            print(f"Perícias: {', '.join(self.classe.pericias)}")
+            print(f"Proficiencias: {', '.join(self.classe.proficiencias)}")
+
         print("\n==--=== Fim dos Atributos ==--==\n")
 
 class EstiloClassico:
@@ -77,8 +93,8 @@ class EstiloAventureiro:
         print("\nRolando 3 dados de 6 lados seis vezes e distribuindo como desejar...\n")
         resultados = [sum(random.randint(1, 6) for _ in range(3)) for _ in range(6)] #Rolando 3 dados de 6 lados seis vezes
         print(f"Resultados das rolagens: {resultados}") #Exibindo os resultados das rolagens
-        atributos = list(personagem.atributos.keys()) # Obtendo os atributos do personagem
-        for atributo in atributos: #
+        atributos = list(personagem.atributos.keys()) #Obtendo os atributos do personagem
+        for atributo in atributos:
             while True:
                 try:
                     valor = int(input(f"Escolha um valor para {atributo} entre {resultados}: "))
@@ -99,10 +115,10 @@ class EstiloHeroico:
             dados = [random.randint(1, 6) for _ in range(4)] #Rolando 4 dados de 6 lados
             dados.remove(min(dados)) #Removendo o menor dado
             resultados.append(sum(dados)) #Somando os valores dos dados restantes
-        print(f"Resultados das rolagens: {resultados}") 
+        print(f"Resultados das rolagens: {resultados}")
         atributos = list(personagem.atributos.keys())
         for atributo in atributos:
-            while True: 
+            while True:
                 try:
                     valor = int(input(f"Escolha um valor para {atributo} entre {resultados}: "))
                     if valor in resultados:
@@ -113,6 +129,43 @@ class EstiloHeroico:
                         print("Valor inválido, escolha um dos resultados disponíveis.")
                 except ValueError:
                     print("Digite um número válido.")
+
+class ClassePersonagem:
+    def __init__(self, vida, pericias, proficiencias):
+        self.vida = vida
+        self.pericias = pericias
+        self.proficiencias = proficiencias
+
+class Guerreiro(ClassePersonagem):
+    def __init__(self):
+        super().__init__(vida=10, pericias=["Atletismo", "Intimidação"], proficiencias=["Armaduras", "Armas"])
+
+class Mago(ClassePersonagem):
+    def __init__(self):
+        super().__init__(vida=4, pericias=["Arcanismo", "História"], proficiencias=["Magias", "Cajados"])
+
+class Ladino(ClassePersonagem):
+    def __init__(self):
+        super().__init__(vida=6, pericias=["Ataque Furtivo", "Ouvir Ruídos"], proficiencias=["Armas leves", "Ferramentas de ladrão"])
+
+class Raca:
+    def __init__(self, movimento, infravisao, alinhamento, habilidades):
+        self.movimento = movimento
+        self.infravisao = infravisao
+        self.alinhamento = alinhamento
+        self.habilidades = habilidades
+
+class Humano(Raca):
+    def __init__(self):
+        super().__init__(movimento=9, infravisao="Nâo Possui", alinhamento="Qualquer", habilidades=["Versatilidade", "Adaptação"])
+
+class Elfo(Raca):
+    def __init__(self):
+        super().__init__(movimento=9, infravisao=18, alinhamento="Neutralidade", habilidades=["Percepção Natural", "Imunidades"])
+
+class Anao(Raca):
+    def __init__(self):
+        super().__init__(movimento=6, infravisao=18, alinhamento="Ordem", habilidades=["Mineradores", "Vigoroso"])
 
 def main():
     print(f"\nBem-Vindo à OldDragon. Vamos começar com a sua escolha de estilo de jogo, Caro Aventureiro!\nEscolha abaixo qual estilo gostaria de usar:")
@@ -136,9 +189,26 @@ def main():
         print(f"\nOpção inválida. Tente novamente.")
         return main()
     estilo.distribuir_atributos(personagem)
+
+     # Escolha de Raça
+    print("\nEscolha a raça do personagem:")
+    print("1 - Humano\n2 - Elfo\n3 - Anão")
+    opcao_raca = int(input("Digite sua escolha: "))
+    if   opcao_raca == 1: personagem.raca = Humano()
+    elif opcao_raca == 2: personagem.raca = Elfo()
+    elif opcao_raca == 3: personagem.raca = Anao()
+
+    # Escolha de Classe
+    print("\nEscolha a classe do personagem:")
+    print("1 - Guerreiro\n2 - Mago\n3 - Ladino")
+    opcao_classe = int(input("Digite sua escolha: "))
+    if   opcao_classe == 1: personagem.classe = Guerreiro()
+    elif opcao_classe == 2: personagem.classe = Mago()
+    elif opcao_classe == 3: personagem.classe = Ladino()
+
     personagem.exibir_atributos()
+
 
 if __name__ == "__main__": # Ponto de entrada do programa
     main() # Chama a função main para iniciar o programa
     print("\nObrigado por jogar OldDragon! Boa sorte em suas aventuras!")
-
