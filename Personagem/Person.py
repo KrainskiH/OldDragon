@@ -1,4 +1,4 @@
-from atributos import interpretar_atributo
+from Personagem.atributos import interpretar_atributo
 
 class Personagem:
     def __init__ (self, nome): #Método construtor da classe Personagem

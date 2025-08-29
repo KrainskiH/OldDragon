@@ -1,7 +1,7 @@
-from Personagem import Personagem
-from estilos import EstiloClassico, EstiloAventureiro, EstiloHeroico
-from racas import Humano, Elfo, Anao
-from classesPerson import Guerreiro, Mago, Ladino 
+from Personagem.Person import Personagem
+from Personagem.estilos import EstiloClassico, EstiloAventureiro, EstiloHeroico
+from Personagem.racas import Humano, Elfo, Anao
+from Personagem.classesPerson import Guerreiro, Mago, Ladino 
 
 def main():
     print(f"\nBem-Vindo à OldDragon. Vamos começar com a sua escolha de estilo de jogo, Caro Aventureiro!\nEscolha abaixo qual estilo gostaria de usar:")
