@@ -5,6 +5,8 @@ class Raca:
         self.alinhamento = alinhamento
         self.habilidades = habilidades
 
+    def to_dict(self):
+        return self.__dict__
 class Humano(Raca):
     def __init__(self):
         super().__init__(movimento=9, infravisao="Nâo Possui", alinhamento="Qualquer", habilidades=["Versatilidade", "Adaptação"])

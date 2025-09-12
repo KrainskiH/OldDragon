@@ -4,6 +4,10 @@ class ClassePersonagem:
         self.pericias = pericias
         self.proficiencias = proficiencias
 
+    def to_dict(self):
+        return self.__dict__
+
+    
 class Guerreiro(ClassePersonagem):
     def __init__(self):
         super().__init__(vida=10, pericias=["Atletismo", "Intimidação"], proficiencias=["Armaduras", "Armas"])

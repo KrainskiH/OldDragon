@@ -1,4 +1,4 @@
-from Personagem.atributos import interpretar_atributo
+from model.atributos import interpretar_atributo
 
 class Personagem:
     def __init__ (self, nome): #Método construtor da classe Personagem
@@ -15,6 +15,14 @@ class Personagem:
         self.raca = None
         self.classe = None
 
+    def to_dict(self):
+        Personagem_dict = {}
+        for chave, valor in self.__dict__.items():
+            if hasattr(valor, "to_dict"):
+                Personagem_dict[chave] = valor.to_dict()
+            else:
+                Personagem_dict[chave] = valor
+        return Personagem_dict
     def exibir_atributos(self):
         print("\n==--=== Atributos do Personagem ==--==")
         print(f"\nOlá {self.nome}, segue abaixo seu descritivo:")

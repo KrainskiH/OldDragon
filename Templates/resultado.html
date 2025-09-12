@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado</title>
+</head>
+<body>
+    <h1>Personagem Criado!</h1>
+    <p><b>Nome:</b> {{ personagem["nome"] }}</p>
+    <p><b>Raça:</b> {{ personagem["raca"] }}</p>
+    <p><b>Classe:</b> {{ personagem["classe"] }}</p>
+
+    <h2>Atributos:</h2>
+    <ul>
+        {% for atributo, valor in personagem["atributos"].items() %}
+            <li>{{ atributo }}: {{ valor }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
