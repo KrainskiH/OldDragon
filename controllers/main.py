@@ -5,7 +5,6 @@ from model.racas import Humano, Elfo, Anao
 from model.classesPerson import Guerreiro, Mago, Ladino
 
 personagem_bp = Blueprint("personagem", __name__)
-
 @personagem_bp.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -23,7 +22,7 @@ def index():
 
         estilo.distribuir_atributos(personagem)
 
-        # salva personagem temporariamente na sessão
+        # salva personagem como dict de forma consistente
         session["personagem"] = personagem.to_dict()
         return redirect(url_for("personagem.escolher_raca"))
 
@@ -72,5 +71,6 @@ def escolher_classe():
 
 @personagem_bp.route("/resultado")
 def resultado():
-    personagem = session["personagem"]
+    dados = session["personagem"]
+    personagem = Personagem.from_dict(dados)
     return render_template("resultado.html", personagem=personagem)
