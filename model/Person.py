@@ -26,10 +26,10 @@ class Personagem:
     @staticmethod
     def from_dict(data):
         p = Personagem(data["nome"])
-        p.atributos = data["atributos"]
+        p.atributos = data.get("atributos", {})
 
         # reconstrói raça
-        if data["raca"]:
+        if data.get("raca"):
             if data["raca"]["tipo"] == "Humano":
                 from model.racas import Humano
                 p.raca = Humano.from_dict(data["raca"])
@@ -41,7 +41,7 @@ class Personagem:
                 p.raca = Anao.from_dict(data["raca"])
 
         # reconstrói classe
-        if data["classe"]:
+        if data.get("classe"):
             if data["classe"]["tipo"] == "Guerreiro":
                 from model.classesPerson import Guerreiro
                 p.classe = Guerreiro.from_dict(data["classe"])

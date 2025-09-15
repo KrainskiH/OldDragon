@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session 
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from model.Person import Personagem
 from model.estilos import EstiloClassico, EstiloAventureiro, EstiloHeroico
 from model.racas import Humano, Elfo, Anao
-from model.classesPerson import Guerreiro, Mago, Ladino 
+from model.classesPerson import Guerreiro, Mago, Ladino
 
 personagem_bp = Blueprint("personagem", __name__)
 
@@ -24,7 +24,7 @@ def index():
         estilo.distribuir_atributos(personagem)
 
         # salva personagem temporariamente na sessão
-        session["personagem"] = personagem.__dict__
+        session["personagem"] = personagem.to_dict()
         return redirect(url_for("personagem.escolher_raca"))
 
     return render_template("index.html")
@@ -44,7 +44,7 @@ def escolher_raca():
         else:
             personagem.raca = Anao()
 
-        session["personagem"] = personagem.__dict__
+        session["personagem"] = personagem.to_dict()
         return redirect(url_for("personagem.escolher_classe"))
 
     return render_template("pick_raca.html")
@@ -64,7 +64,7 @@ def escolher_classe():
         else:
             personagem.classe = Ladino()
 
-        session["personagem"] = personagem.__dict__
+        session["personagem"] = personagem.to_dict()
         return redirect(url_for("personagem.resultado"))
 
     return render_template("pick_classe.html")
