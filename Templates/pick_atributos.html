@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Distribua os Atributos</title>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=UnifrakturCook&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h2>Distribua os valores rolados entre os atributos</h2>
+    <p>Valores rolados: <span style="font-size:22px; color:#8b0000; font-weight:bold;">{{ rolagens }}</span></p>
+    <form method="post">
+        {% set atributos = ["Força", "Destreza", "Constituição", "Inteligência", "Sabedoria", "Carisma"] %}
+        {% for atributo in atributos %}
+            <label>{{ atributo }}:</label>
+            <select name="{{ atributo }}" required>
+                {% for valor in rolagens %}
+                    <option value="{{ valor }}">{{ valor }}</option>
+                {% endfor %}
+            </select><br>
+        {% endfor %}
+        <button type="submit">Avançar</button>
+    </form>
+</body>
+</html>

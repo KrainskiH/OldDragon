@@ -1,0 +1,83 @@
+body {
+    font-family: 'MedievalSharp', 'Georgia', serif;
+    background: url('/static/img/parchment.jpg') repeat;
+    color: #2d1a06;
+    padding: 40px;
+}
+h1, h2 {
+    font-family: 'UnifrakturCook', cursive;
+    color: #8b0000;
+    text-shadow: 2px 2px 8px #bfa76f;
+    letter-spacing: 2px;
+}
+#title {
+    font-family: 'UnifrakturCook', cursive;
+    color: #bfa76f;
+    text-shadow: 2px 2px 8px #000;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 60px;
+    border-bottom: 4px solid #bfa76f;
+    padding-bottom: 10px;
+}
+.box, #form {
+    border-image: url('/static/img/borda-medieval.png') 30 round;
+}
+#form, .box {
+    background: rgba(255, 248, 220, 0.95);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #bfa76f;
+    max-width: 500px;
+    margin: auto;
+    border: 2px solid #bfa76f;
+}
+
+label {
+    font-size: 20px;
+    color: #5c3a0a;
+    margin-bottom: 10px;
+    font-family: 'Georgia', serif;
+}
+
+input[type="text"], select, input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #bfa76f;
+    border-radius: 4px;
+    background: #fffbe6;
+    font-size: 18px;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: #bfa76f;
+}
+
+button {
+    background-color: #8b0000;
+    color: #fffbe6;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'MedievalSharp', 'Georgia', serif;
+    box-shadow: 0 2px 8px #bfa76f;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #bfa76f;
+    color: #8b0000;
+}
+
+ul {
+    background: rgba(255, 248, 220, 0.8);
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #bfa76f;
+    box-shadow: 0 0 10px #bfa76f;
+}

@@ -2,12 +2,16 @@
 <html>
 <head>
     <title>Resultado</title>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=UnifrakturCook&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="box">
     <h1>Personagem Criado!</h1>
+</div>
     <p><b>Nome:</b> {{ personagem["nome"] }}</p>
-    <p><b>Raça:</b> {{ personagem["raca"] }}</p>
-    <p><b>Classe:</b> {{ personagem["classe"] }}</p>
+    <p><b>Raça:</b> {{ personagem["raca"] if personagem["raca"] else "Nenhuma" }}</p>
+    <p><b>Classe:</b> {{ personagem["classe"] if personagem["classe"] else "Nenhuma" }}</p>
 
     <h2>Atributos:</h2>
     <ul>
@@ -15,5 +19,11 @@
             <li>{{ atributo }}: {{ valor }}</li>
         {% endfor %}
     </ul>
+    <a href="{{ url_for('personagem.index') }}">
+        <button>Resetar</button>
+    </a>
+    <a href="{{ url_for('personagem.index') }}">
+        <button>Voltar</button>
+    </a>
 </body>
 </html>
