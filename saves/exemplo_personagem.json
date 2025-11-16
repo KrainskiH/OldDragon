@@ -1,0 +1,33 @@
+{
+    "nome": "Aragorn",
+    "atributos": {
+        "Força": 16,
+        "Destreza": 14,
+        "Constituição": 15,
+        "Inteligência": 12,
+        "Sabedoria": 13,
+        "Carisma": 14
+    },
+    "raca": {
+        "movimento": 9,
+        "infravisao": "Nâo Possui",
+        "alinhamento": "Qualquer",
+        "habilidades": [
+            "Versatilidade",
+            "Adaptação"
+        ],
+        "tipo": "Humano"
+    },
+    "classe": {
+        "vida": 10,
+        "pericias": [
+            "Atletismo",
+            "Intimidação"
+        ],
+        "proficiencias": [
+            "Armaduras",
+            "Armas"
+        ],
+        "tipo": "Guerreiro"
+    }
+}

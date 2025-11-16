@@ -13,7 +13,9 @@ class Guerreiro(ClassePersonagem):
         super().__init__(vida=10, pericias=["Atletismo", "Intimidação"], proficiencias=["Armaduras", "Armas"])
 
     def to_dict(self):
-        return {"tipo": "Guerreiro"}
+        result = super().to_dict()
+        result["tipo"] = "Guerreiro"
+        return result
 
     @staticmethod
     def from_dict(data):
@@ -24,7 +26,10 @@ class Mago(ClassePersonagem):
         super().__init__(vida=4, pericias=["Arcanismo", "História"], proficiencias=["Magias", "Cajados"])
 
     def to_dict(self):
-        return {"tipo": "Mago"}
+        result = super().to_dict()
+        result["tipo"] = "Mago"
+        return result
+        
     @staticmethod
     def from_dict(data):
         return Mago()
@@ -34,7 +39,10 @@ class Ladino(ClassePersonagem):
         super().__init__(vida=6, pericias=["Ataque Furtivo", "Ouvir Ruídos"], proficiencias=["Armas leves", "Ferramentas de ladrão"])
 
     def to_dict(self):
-        return {"tipo": "Ladino"}
+        result = super().to_dict()
+        result["tipo"] = "Ladino"
+        return result
+        
     @staticmethod
     def from_dict(data):
         return Ladino()

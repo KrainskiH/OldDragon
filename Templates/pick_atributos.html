@@ -2,23 +2,77 @@
 <html>
 <head>
     <title>Distribua os Atributos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=UnifrakturCook&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h2>Distribua os valores rolados entre os atributos</h2>
-    <p>Valores rolados: <span style="font-size:22px; color:#8b0000; font-weight:bold;">{{ rolagens }}</span></p>
-    <form method="post">
-        {% set atributos = ["Força", "Destreza", "Constituição", "Inteligência", "Sabedoria", "Carisma"] %}
-        {% for atributo in atributos %}
-            <label>{{ atributo }}:</label>
-            <select name="{{ atributo }}" required>
-                {% for valor in rolagens %}
-                    <option value="{{ valor }}">{{ valor }}</option>
+    <div class="box">
+        <h2>Distribua os valores rolados entre os atributos</h2>
+        
+        <!-- Exibir mensagens flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
                 {% endfor %}
-            </select><br>
-        {% endfor %}
-        <button type="submit">Avançar</button>
-    </form>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="valores-rolados">
+            <p><strong>Valores disponíveis:</strong></p>
+            <div class="valores-container">
+                {% for valor in rolagens %}
+                    <span class="valor-badge">{{ valor }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <form method="post">
+            {% set atributos = ["Força", "Destreza", "Constituição", "Inteligência", "Sabedoria", "Carisma"] %}
+            <div class="atributos-grid">
+                {% for atributo in atributos %}
+                    <div class="atributo-item">
+                        <label for="{{ atributo }}">{{ atributo }}:</label>
+                        <select name="{{ atributo }}" id="{{ atributo }}" required>
+                            <option value="">Selecione...</option>
+                            {% for valor in rolagens %}
+                                <option value="{{ valor }}">{{ valor }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit">Avançar</button>
+        </form>
+    </div>
+    
+    <script>
+        // Script para destacar valores já usados
+        document.addEventListener('DOMContentLoaded', function() {
+            const selects = document.querySelectorAll('select');
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    updateAvailableValues();
+                });
+            });
+            
+            function updateAvailableValues() {
+                const usedValues = Array.from(selects).map(s => s.value).filter(v => v);
+                const badges = document.querySelectorAll('.valor-badge');
+                
+                badges.forEach(badge => {
+                    const value = badge.textContent;
+                    if (usedValues.includes(value)) {
+                        badge.classList.add('usado');
+                    } else {
+                        badge.classList.remove('usado');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

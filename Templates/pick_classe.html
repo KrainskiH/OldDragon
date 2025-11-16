@@ -2,16 +2,41 @@
 <html>
 <head>
     <title>Escolha a Classe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=UnifrakturCook&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h2>Escolha a classe do personagem</h2>
-    <form method="post">
-        <input type="radio" name="classe" value="guerreiro" required> Guerreiro <br>
-        <input type="radio" name="classe" value="mago"> Mago <br>
-        <input type="radio" name="classe" value="ladino"> Ladino <br><br>
-        <button type="submit">Avançar</button>
-    </form>
+    <div class="box">
+        <h2>Escolha a classe do personagem</h2>
+        
+        <!-- Exibir mensagens flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="post">
+            {% for nome, info in classes_info.items() %}
+                <div class="classe-option">
+                    <input type="radio" name="classe" value="{{ nome.lower() }}" id="{{ nome.lower() }}" required>
+                    <label for="{{ nome.lower() }}" class="classe-label">
+                        <strong>{{ nome }}</strong>
+                        <div class="classe-details">
+                            <p><strong>Vida Inicial:</strong> {{ info.vida }}</p>
+                            <p><strong>Perícias:</strong> {{ info.pericias|join(', ') }}</p>
+                            <p><strong>Proficiências:</strong> {{ info.proficiencias|join(', ') }}</p>
+                        </div>
+                    </label>
+                </div>
+            {% endfor %}
+            <button type="submit">Avançar</button>
+        </form>
+    </div>
 </body>
 </html>

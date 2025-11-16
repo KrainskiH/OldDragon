@@ -1,29 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resultado</title>
+    <title>Resultado - {{ personagem["nome"] }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=UnifrakturCook&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="box">
-    <h1>Personagem Criado!</h1>
-</div>
-    <p><b>Nome:</b> {{ personagem["nome"] }}</p>
-    <p><b>Raça:</b> {{ personagem["raca"] if personagem["raca"] else "Nenhuma" }}</p>
-    <p><b>Classe:</b> {{ personagem["classe"] if personagem["classe"] else "Nenhuma" }}</p>
+    <div class="resultado-container">
+        <div class="box resultado-header">
+            <h1>🏰 Personagem Criado! 🏰</h1>
+            <h2>{{ personagem["nome"] }}</h2>
+        </div>
+        
+        <!-- Exibir mensagens flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="personagem-info">
+            <div class="info-section">
+                <h3>🎭 Informações Básicas</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Raça:</strong> {{ personagem["raca"] if personagem["raca"] else "Nenhuma" }}
+                    </div>
+                    <div class="info-item">
+                        <strong>Classe:</strong> {{ personagem["classe"] if personagem["classe"] else "Nenhuma" }}
+                    </div>
+                </div>
+            </div>
 
-    <h2>Atributos:</h2>
-    <ul>
-        {% for atributo, valor in personagem["atributos"].items() %}
-            <li>{{ atributo }}: {{ valor }}</li>
-        {% endfor %}
-    </ul>
-    <a href="{{ url_for('personagem.index') }}">
-        <button>Resetar</button>
-    </a>
-    <a href="{{ url_for('personagem.index') }}">
-        <button>Voltar</button>
-    </a>
+            <div class="info-section">
+                <h3>⚔️ Atributos</h3>
+                <div class="atributos-display">
+                    {% for atributo, valor in personagem["atributos"].items() %}
+                        <div class="atributo-card">
+                            <div class="atributo-nome">{{ atributo }}</div>
+                            <div class="atributo-valor">{{ valor }}</div>
+                            <div class="atributo-modificador">
+                                {% set mod = ((valor - 10) // 2) %}
+                                {% if mod >= 0 %}+{{ mod }}{% else %}{{ mod }}{% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions-container">
+            <form action="{{ url_for('personagem.salvar_personagem_json') }}" method="post" class="inline-form">
+                <button type="submit" class="btn-salvar">💾 Salvar JSON</button>
+            </form>
+            
+            <div class="navigation-buttons">
+                <a href="{{ url_for('personagem.listar_personagens_salvos') }}" class="btn-link">
+                    <button class="btn-secondary">📚 Ver Salvos</button>
+                </a>
+                <a href="{{ url_for('personagem.index') }}" class="btn-link">
+                    <button class="btn-primary">🔄 Novo Personagem</button>
+                </a>
+                <a href="{{ url_for('personagem.index') }}" class="btn-link">
+                    <button class="btn-primary">🏠 Início</button>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

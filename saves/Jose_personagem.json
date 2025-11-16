@@ -1,0 +1,33 @@
+{
+    "nome": "Jose",
+    "atributos": {
+        "Carisma": 11,
+        "Constituição": 6,
+        "Destreza": 7,
+        "Força": 16,
+        "Inteligência": 5,
+        "Sabedoria": 14
+    },
+    "raca": {
+        "movimento": 9,
+        "infravisao": "Nâo Possui",
+        "alinhamento": "Qualquer",
+        "habilidades": [
+            "Versatilidade",
+            "Adaptação"
+        ],
+        "tipo": "Humano"
+    },
+    "classe": {
+        "vida": 4,
+        "pericias": [
+            "Arcanismo",
+            "História"
+        ],
+        "proficiencias": [
+            "Magias",
+            "Cajados"
+        ],
+        "tipo": "Mago"
+    }
+}
