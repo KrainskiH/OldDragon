@@ -115,7 +115,13 @@ def escolher_raca():
         # Validação da entrada
         if not opcao or opcao not in ["humano", "elfo", "anao"]:
             flash("Por favor, selecione uma raça válida!", "error")
-            return render_template("pick_raca.html")
+            # Buscar informações das raças para exibir novamente
+            racas_info = {
+                "Humano": Humano(),
+                "Elfo": Elfo(),
+                "Anão": Anao()
+            }
+            return render_template("pick_raca.html", racas_info=racas_info)
             
         # Criar objeto da raça ao invés de string
         if opcao == "humano":
@@ -150,7 +156,13 @@ def escolher_classe():
         # Validação da entrada
         if not opcao or opcao not in ["guerreiro", "mago", "ladino"]:
             flash("Por favor, selecione uma classe válida!", "error")
-            return render_template("pick_classe.html")
+            # Buscar informações das classes para exibir novamente
+            classes_info = {
+                "Guerreiro": Guerreiro(),
+                "Mago": Mago(),
+                "Ladino": Ladino()
+            }
+            return render_template("pick_classe.html", classes_info=classes_info)
             
         # Criar objeto da classe ao invés de string
         if opcao == "guerreiro":
